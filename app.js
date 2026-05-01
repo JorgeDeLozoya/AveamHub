@@ -5,8 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const appView = document.getElementById('app-view');
     const navItems = document.querySelectorAll('.nav-item');
 
+    // Production State
+    let productionTasks = [
+        { prenda: 'Chaqueta Denim', diseño: 'AVEAM Custom Back', prioridad: 'Alta', estado: 'Esperando Prenda' }
+    ];
+
     // Keep track of the current dashboard HTML to restore it
-    const dashboardTemplate = appView.innerHTML;
+    const dashboardTemplate = appView ? appView.innerHTML : '';
 
     const views = {
         'Dashboard': () => {
@@ -38,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h1>Línea de Producción</h1>
                         <p style="color: var(--text-muted)">Estado de bordados y pedidos locales.</p>
                     </div>
+                    <button class="card btn-primary" id="add-task-btn">+ Añadir Bordado</button>
                 </header>
                 <div class="dashboard-grid">
                     <div class="card">
@@ -65,17 +71,28 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <th>Estado</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Chaqueta Denim</td>
-                                <td>AVEAM Custom Back</td>
-                                <td>Alta</td>
-                                <td><span class="status-pill status-pending">Esperando Prenda</span></td>
-                            </tr>
+                        <tbody id="production-table-body">
+                            ${productionTasks.map(task => `
+                                <tr>
+                                    <td>${task.prenda}</td>
+                                    <td>${task.diseño}</td>
+                                    <td>${task.prioridad}</td>
+                                    <td><span class="status-pill status-pending">${task.estado}</span></td>
+                                </tr>
+                            `).join('')}
                         </tbody>
                     </table>
                 </div>
             `;
+            
+            document.getElementById('add-task-btn').addEventListener('click', () => {
+                const prenda = prompt('¿Qué prenda es?');
+                const diseño = prompt('¿Qué diseño lleva?');
+                if (prenda && diseño) {
+                    productionTasks.push({ prenda, diseño, prioridad: 'Media', estado: 'Pendiente' });
+                    views['Producción'](); // Refresh view
+                }
+            });
         },
         'Redes Sociales': () => {
             appView.innerHTML = `
@@ -149,10 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>Printful API</span>
                             <span style="color: #4caf50;">● Conectado</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 12px;">
-                            <span>Meta Business (IG)</span>
-                            <button style="background: var(--accent-primary); border: none; padding: 5px 15px; border-radius: 5px; font-weight: 600; cursor: pointer;">Conectar</button>
-                        </div>
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <a href="index.html" style="color: var(--accent-primary); text-decoration: none;">← Volver a la Tienda Pública</a>
                     </div>
                 </div>
             `;
@@ -195,22 +211,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Re-initialize any dashboard specific listeners if needed
     }
 
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            navItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            
-            const pageName = item.querySelector('span').innerText;
-            if (views[pageName]) {
-                appView.style.opacity = '0';
-                setTimeout(() => {
-                    views[pageName]();
-                    appView.style.opacity = '1';
-                }, 150);
-            }
+    if (appView) {
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                const pageName = item.querySelector('span').innerText;
+                if (views[pageName]) {
+                    appView.style.opacity = '0';
+                    setTimeout(() => {
+                        views[pageName]();
+                        appView.style.opacity = '1';
+                    }, 150);
+                }
+            });
         });
-    });
+    }
 
     // Handle hover effects for cards dynamically added
     document.addEventListener('mouseover', (e) => {

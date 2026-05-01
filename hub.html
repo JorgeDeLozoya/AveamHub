@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVEAM Clothing | Hub de Gestión Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">AV</div>
+                <span>AVEAM Clothing</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span>Productos</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"></path><path d="M17 5H7"></path><path d="M19 11l-7 7-7-7"></path><path d="M12 18v4"></path></svg>
+                    <span>Producción</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span>Redes Sociales</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+                    <span>Analíticas</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <span>Configuración</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-content" id="app-view">
+            <header>
+                <div>
+                    <h1>Hola, Ely 👋</h1>
+                    <p style="color: var(--text-muted)">Bienvenido de nuevo a AVEAM Hub.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <span>Ely Store</span>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-title">Ventas Totales (Mes)</div>
+                    <div class="card-value">1.240 €</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m19 12-7-7-7 7M12 19V5"/></svg>
+                        +12.5% vs mes anterior
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Pedidos Printful</div>
+                    <div class="card-value">48</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m19 12-7-7-7 7M12 19V5"/></svg>
+                        8 pendientes de envío
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Engagement RRSS</div>
+                    <div class="card-value">8.4k</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m19 12-7-7-7 7M12 19V5"/></svg>
+                        +5% en TikTok
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders Section -->
+            <h2 class="section-title">Pedidos Recientes</h2>
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <table class="order-list">
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Estado Printful</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1294</td>
+                            <td>Carlos Ruiz</td>
+                            <td>Sudadera Bordada "AVEAM"</td>
+                            <td><span class="status-pill status-shipped">Enviado</span></td>
+                            <td>45.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>#1295</td>
+                            <td>Marta Sanz</td>
+                            <td>Camiseta Logo Gold</td>
+                            <td><span class="status-pill status-pending">En espera</span></td>
+                            <td>28.50 €</td>
+                        </tr>
+                        <tr>
+                            <td>#1296</td>
+                            <td>Dani F.</td>
+                            <td>Gorra Bordada Premium</td>
+                            <td><span class="status-pill status-delivered">Entregado</span></td>
+                            <td>32.00 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Social Media Quick Action -->
+            <h2 class="section-title">Próximas Publicaciones</h2>
+            <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="card">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <div style="width: 50px; height: 50px; background: #000; border-radius: 10px; display: grid; place-items: center;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-1.13-.31-2.34-.25-3.41.33-.71.38-1.25 1.03-1.51 1.8-.31.82-.28 1.73.08 2.51.41.78 1.08 1.4 1.86 1.81.88.43 1.91.47 2.82.15.8-.29 1.5-.9 1.9-1.61.47-.71.69-1.53.67-2.37V.02z"/></svg>
+                        </div>
+                        <div>
+                            <div class="card-title" style="margin: 0">TikTok - Mañana 10:00</div>
+                            <div style="font-weight: 600">Review Sudadera Bordada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border: 1px dashed var(--border-color); background: transparent; display: grid; place-items: center; cursor: pointer;">
+                    <div style="color: var(--accent-primary); font-weight: 600;">+ Programar Post</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
