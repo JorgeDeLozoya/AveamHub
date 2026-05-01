@@ -10,7 +10,7 @@
         body {
             background-color: #fff;
             color: #000;
-            display: block; /* Overriding possible flex from style.css */
+            display: block;
         }
 
         .header-store {
@@ -18,7 +18,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f0f0f0;
             position: sticky;
             top: 0;
             background: #fff;
@@ -47,89 +47,103 @@
         }
 
         .hero-section {
-            height: 85vh;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: #f4f4f4;
             margin: 1rem;
-            overflow: hidden;
+            background: #fff;
         }
 
         .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.8;
-            z-index: 1;
+            opacity: 1;
         }
 
         .hero-content {
-            position: relative;
+            position: absolute;
             z-index: 2;
             text-align: center;
             padding: 2rem;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            width: 80%;
+            max-width: 1000px;
         }
 
         .hero-content p {
             text-transform: uppercase;
             font-weight: 900;
-            letter-spacing: 0.4rem;
+            letter-spacing: 0.5rem;
             margin-bottom: 1.5rem;
             font-size: 0.8rem;
         }
 
         .hero-content h1 {
-            font-size: clamp(3rem, 12vw, 8rem);
+            font-size: clamp(2rem, 10vw, 7rem);
             font-weight: 900;
             line-height: 0.85;
             margin-bottom: 3rem;
+            letter-spacing: -0.05em;
         }
 
         .btn-black {
             background: #000;
             color: #fff;
-            padding: 1.2rem 3.5rem;
+            padding: 1.2rem 4rem;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 900;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             display: inline-block;
-            letter-spacing: 0.1rem;
+            letter-spacing: 0.2rem;
             transition: all 0.3s ease;
         }
 
         .btn-black:hover {
             background: #333;
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
         .grid-store {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             padding: 1rem;
         }
 
         .product-item {
             background: #f9f9f9;
-            padding: 6rem 2rem;
+            padding: 2rem;
             text-align: center;
             position: relative;
-            transition: background 0.3s ease;
-            min-height: 600px;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+
+        .product-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
 
-        .product-item:hover {
-            background: #f0f0f0;
+        .product-image-container img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-item:hover .product-image-container img {
+            transform: scale(1.1);
         }
 
         .product-label {
@@ -139,33 +153,58 @@
             font-size: 0.6rem;
             font-weight: 900;
             text-transform: uppercase;
-            border: 1px solid #000;
-            padding: 0.3rem 0.6rem;
+            background: #000;
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            z-index: 5;
         }
 
         .product-name {
-            margin-top: 3rem;
+            margin-top: 2rem;
             font-weight: 900;
             text-transform: uppercase;
-            font-size: 1.4rem;
-            letter-spacing: 0.05rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.1rem;
         }
 
         .product-price {
-            font-size: 0.85rem;
-            color: #555;
-            margin-top: 0.8rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-weight: 700;
+        }
+
+        .about-section {
+            padding: 10rem 4rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #444;
+            letter-spacing: 0.02em;
         }
 
         footer {
-            padding: 6rem 2rem;
-            text-align: center;
-            border-top: 1px solid #eee;
-            font-size: 0.65rem;
+            padding: 6rem 4rem;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 0.7rem;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.2rem;
-            color: #888;
+            letter-spacing: 0.15rem;
         }
 
         .hub-access {
@@ -174,11 +213,11 @@
             right: 2rem;
             background: #000;
             color: #fff;
-            padding: 0.8rem 1.2rem;
+            padding: 1rem 1.5rem;
             font-size: 0.6rem;
             text-decoration: none;
             font-weight: 900;
-            letter-spacing: 0.15rem;
+            letter-spacing: 0.2rem;
             z-index: 1000;
         }
     </style>
@@ -187,9 +226,9 @@
     <header class="header-store">
         <div class="logo-store">AVEAM</div>
         <nav class="nav-menu">
-            <a href="#">Shop All</a>
-            <a href="#">Drops</a>
-            <a href="#">About</a>
+            <a href="#">Ready to wear</a>
+            <a href="#">Bordados</a>
+            <a href="#">Archive</a>
             <a href="#">Cart (0)</a>
         </nav>
     </header>
@@ -197,23 +236,32 @@
     <section class="hero-section">
         <img src="aveam_hero_hoodie_1777651086148.png" alt="AVEAM Hero" class="hero-image">
         <div class="hero-content">
-            <p>Spring Summer 2026</p>
-            <h1>OBJECTS OF<br>DESIRE</h1>
-            <a href="#" class="btn-black">Discover Collection</a>
+            <p>Collection 001 — Aveam Hub</p>
+            <h1>TIMELESS<br>ARTISANRY</h1>
+            <a href="#shop" class="btn-black">Shop the Drop</a>
         </div>
     </section>
 
-    <section class="grid-store">
+    <section class="about-section">
+        <h2>Our Craft</h2>
+        <p>AVEAM es una marca nacida en España que fusiona el lujo contemporáneo con la tradición artesanal del bordado. Cada pieza es producida individualmente bajo demanda, garantizando exclusividad y calidad insuperable.</p>
+    </section>
+
+    <section class="grid-store" id="shop">
         <div class="product-item">
             <span class="product-label">New Arrival</span>
-            <div style="font-weight: 900; font-size: 4rem; color: #eee;">01</div>
-            <div class="product-name">Silk Thread Hoodie</div>
+            <div class="product-image-container">
+                <img src="aveam_silk_hoodie_white_1777656488743.png" alt="Silk Hoodie">
+            </div>
+            <div class="product-name">Silk Embroidery Hoodie</div>
             <div class="product-price">120.00 EUR</div>
         </div>
         <div class="product-item">
-            <span class="product-label">Limited Edition</span>
-            <div style="font-weight: 900; font-size: 4rem; color: #eee;">02</div>
-            <div class="product-name">Brutal Cap Black</div>
+            <span class="product-label">Limited</span>
+            <div class="product-image-container">
+                <img src="aveam_brutal_cap_white_1777656655425.png" alt="Brutal Cap">
+            </div>
+            <div class="product-name">Brutal Signature Cap</div>
             <div class="product-price">45.00 EUR</div>
         </div>
     </section>
@@ -221,7 +269,15 @@
     <a href="hub.html" class="hub-access">ADMIN HUB</a>
 
     <footer>
-        AVEAM CLOTHING © 2026. PRODUCED IN SPAIN. ALL RIGHTS RESERVED.
+        <div>
+            AVEAM CLOTHING © 2026<br>
+            MADE IN SPAIN — BORDADOS ARTESANALES
+        </div>
+        <div style="text-align: right;">
+            INSTAGRAM<br>
+            TIKTOK<br>
+            TWITTER
+        </div>
     </footer>
 </body>
 </html>
