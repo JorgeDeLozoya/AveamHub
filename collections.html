@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVEAM | Collections</title>
+    <meta name="description" content="Browse the full AVEAM collection. Luxury embroidered streetwear, hoodies, caps and accessories. Made in Spain.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="store.css">
+    <link rel="stylesheet" href="collections.css">
+</head>
+<body class="collections-body">
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcement-bar">
+        <span>FREE SHIPPING TO SPAIN ON ALL ORDERS</span>
+        <button class="announcement-close" id="announcement-close" aria-label="Close">&times;</button>
+    </div>
+
+    <!-- Header -->
+    <header class="store-header" id="store-header">
+        <div class="header-left">
+            <button class="header-icon menu-toggle" id="menu-toggle" aria-label="Open menu">
+                <svg width="22" height="14" viewBox="0 0 22 14" fill="none">
+                    <line y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5"/>
+                    <line y1="7" x2="22" y2="7" stroke="currentColor" stroke-width="1.5"/>
+                    <line y1="13" x2="22" y2="13" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+            <button class="header-icon" id="search-toggle" aria-label="Search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </button>
+        </div>
+        <a href="index.html" class="header-logo">
+            <img src="logos/logo.png" alt="AVEAM" class="logo-img">
+        </a>
+        <div class="header-right">
+            <button class="header-icon" aria-label="Account">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+            </button>
+            <button class="header-icon" aria-label="Wishlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+            </button>
+            <button class="header-icon cart-toggle" id="cart-toggle" aria-label="Cart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-input" placeholder="SEARCH AVEAM..." autocomplete="off">
+            <button class="search-close" id="search-close" aria-label="Close search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Main Layout: Sidebar + Grid -->
+    <div class="collections-layout">
+
+        <!-- Left Sidebar (persistent on desktop, drawer on mobile) -->
+        <aside class="shop-sidebar" id="shop-sidebar">
+            <div class="shop-sidebar-header">
+                <button class="sidebar-close-mobile" id="sidebar-close" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="shop-categories">
+                <a href="#" class="cat-link active" data-cat="all">ALL PRODUCTS</a>
+                <a href="#" class="cat-link" data-cat="summer">SUMMER 2026 ☀</a>
+                <a href="#" class="cat-link" data-cat="new-arrivals">NEW ARRIVALS</a>
+
+                <div class="cat-group">
+                    <span class="cat-group-title">READY TO WEAR</span>
+                    <a href="#" class="cat-link sub" data-cat="hoodies">Hoodies & Sweatshirts</a>
+                    <a href="#" class="cat-link sub" data-cat="tees">Tees</a>
+                    <a href="#" class="cat-link sub" data-cat="pants">Pants</a>
+                    <a href="#" class="cat-link sub" data-cat="outerwear">Outerwear</a>
+                    <a href="#" class="cat-link sub" data-cat="rtw-all">View All</a>
+                </div>
+
+                <div class="cat-group">
+                    <span class="cat-group-title">ACCESSORIES</span>
+                    <a href="#" class="cat-link sub" data-cat="caps">Caps & Hats</a>
+                    <a href="#" class="cat-link sub" data-cat="bags">Bags</a>
+                    <a href="#" class="cat-link sub" data-cat="acc-all">View All</a>
+                </div>
+
+                <a href="#" class="cat-link" data-cat="bordados">BORDADOS</a>
+                <a href="#" class="cat-link" data-cat="archive">ARCHIVE</a>
+            </nav>
+
+            <div class="shop-sidebar-footer">
+                <a href="index.html" class="back-home-link">← BACK TO HOME</a>
+            </div>
+        </aside>
+
+        <!-- Right Content -->
+        <main class="shop-main">
+            <!-- Category Header -->
+            <div class="shop-header">
+                <h1 class="shop-title" id="shop-title">ALL PRODUCTS</h1>
+                <div class="shop-controls">
+                    <span class="product-count" id="product-count">0 PRODUCTS</span>
+                    <button class="refine-btn mobile-filter" id="mobile-filter-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+                            <circle cx="8" cy="6" r="2" fill="currentColor"/><circle cx="16" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="18" r="2" fill="currentColor"/>
+                        </svg>
+                        FILTER
+                    </button>
+                    <div class="sort-dropdown">
+                        <select id="sort-select" class="sort-select">
+                            <option value="featured">FEATURED</option>
+                            <option value="price-asc">PRICE: LOW TO HIGH</option>
+                            <option value="price-desc">PRICE: HIGH TO LOW</option>
+                            <option value="newest">NEWEST</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="shop-grid" id="shop-grid">
+                <!-- Products injected by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="shop-empty" id="shop-empty" style="display:none;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <p>No products found in this category</p>
+                <a href="#" class="cat-link reset-link" data-cat="all">VIEW ALL PRODUCTS</a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>YOUR BAG</h3>
+            <button class="cart-close" id="cart-close" aria-label="Close cart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="cart-empty" id="cart-empty">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <p>Your bag is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display:none;">
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="cart-total-price">€0,00</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+            <p class="cart-shipping-note">Free shipping to Spain on all orders</p>
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="store-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logos/logo.png" alt="AVEAM" class="footer-logo">
+                <p class="footer-tagline">Luxury Streetwear<br>Made in Spain</p>
+            </div>
+            <div class="footer-col">
+                <h4>SHOP</h4>
+                <a href="collections.html?cat=new-arrivals">New Arrivals</a>
+                <a href="collections.html?cat=rtw-all">Ready to Wear</a>
+                <a href="collections.html?cat=acc-all">Accessories</a>
+                <a href="collections.html?cat=bordados">Bordados</a>
+            </div>
+            <div class="footer-col">
+                <h4>INFO</h4>
+                <a href="#">About Us</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">Size Guide</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>FOLLOW</h4>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 AVEAM CLOTHING. ALL RIGHTS RESERVED.</span>
+            <span>BORDADOS ARTESANALES — HECHO EN ESPAÑA</span>
+        </div>
+    </footer>
+
+    <a href="hub.html" class="hub-access" title="Admin Hub">⚙</a>
+
+    <script src="collections.js"></script>
+</body>
+</html>
