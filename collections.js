@@ -2,126 +2,134 @@
    AVEAM Collections — Product Data & Logic
    ============================================ */
 
-// ── Product Catalog ──
-const PRODUCTS = [
-    {
-        id: 'silk-hoodie-black',
-        name: 'SILK EMBROIDERY HOODIE',
-        price: 120,
-        img: 'fotos/aveam_silk_hoodie_white_1777656488743.png',
-        badge: 'NEW IN',
-        categories: ['all', 'new-arrivals', 'hoodies', 'rtw-all', 'bordados', 'summer'],
-        sizes: ['S', 'M', 'L', 'XL'],
-        desc: 'Hoodie de algodón premium con bordado de seda hecho a mano. Diseño Atelier Nocturne exclusivo. Producción limitada bajo demanda.'
-    },
-    {
-        id: 'brutal-cap',
-        name: 'BRUTAL SIGNATURE CAP',
-        price: 45,
-        img: 'fotos/aveam_brutal_cap_white_1777656655425.png',
-        badge: 'LIMITED',
-        categories: ['all', 'new-arrivals', 'caps', 'acc-all', 'summer'],
-        sizes: ['ONE SIZE'],
-        desc: 'Gorra desestructurada con bordado AVEAM frontal. Cierre metálico ajustable. Algodón lavado premium.'
-    },
-    {
-        id: 'atelier-hoodie',
-        name: 'ATELIER NOCTURNE HOODIE',
-        price: 150,
-        img: 'fotos/aveam_silk_hoodie_white_1777656488743.png',
-        badge: 'NEW IN',
-        categories: ['all', 'new-arrivals', 'hoodies', 'rtw-all', 'bordados'],
-        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-        desc: 'Edición premium del hoodie insignia con bordado completo en pecho. Hilo de seda metalizado sobre algodón 380gsm.'
-    },
-    {
-        id: 'classic-cap',
-        name: 'AVEAM CLASSIC CAP',
-        price: 40,
-        img: 'fotos/aveam_brutal_cap_white_1777656655425.png',
-        badge: 'NEW IN',
-        categories: ['all', 'caps', 'acc-all'],
-        sizes: ['ONE SIZE'],
-        desc: 'Gorra clásica con logo AVEAM bordado. Perfil bajo, algodón 100%. El accesorio esencial.'
-    },
-    {
-        id: 'crest-hoodie',
-        name: 'CREST EMBROIDERY HOODIE',
-        price: 135,
-        img: 'fotos/aveam_silk_hoodie_white_1777656488743.png',
-        badge: 'COMING SOON',
-        categories: ['all', 'hoodies', 'rtw-all', 'bordados', 'archive'],
-        sizes: ['M', 'L', 'XL'],
-        desc: 'Hoodie con escudo heráldico AVEAM bordado en hilo dorado. Pieza de archivo, edición numerada.'
-    },
-    {
-        id: 'logo-tee',
-        name: 'AVEAM LOGO TEE',
-        price: 55,
-        img: 'fotos/aveam_brutal_cap_white_1777656655425.png',
-        badge: 'SOON',
-        categories: ['all', 'tees', 'rtw-all'],
-        sizes: ['S', 'M', 'L', 'XL'],
-        desc: 'Camiseta oversize de algodón orgánico 240gsm con logo AVEAM bordado en pecho. Corte drop shoulder.'
-    },
-    {
-        id: 'heritage-hoodie',
-        name: 'HERITAGE PULLOVER',
-        price: 160,
-        img: 'fotos/aveam_silk_hoodie_white_1777656488743.png',
-        badge: 'ARCHIVE',
-        categories: ['all', 'hoodies', 'rtw-all', 'archive'],
-        sizes: ['L', 'XL'],
-        desc: 'Pieza de archivo de la primera colección AVEAM. Bordado artesanal de herencia española. Stock limitado.'
-    },
-    {
-        id: 'trucker-cap',
-        name: 'AVEAM TRUCKER CAP',
-        price: 38,
-        img: 'fotos/aveam_brutal_cap_white_1777656655425.png',
-        badge: 'NEW IN',
-        categories: ['all', 'new-arrivals', 'caps', 'acc-all', 'summer'],
-        sizes: ['ONE SIZE'],
-        desc: 'Gorra trucker con panel frontal bordado y malla trasera. Snap-back ajustable. Edición streetwear.'
-    },
-    {
-        id: 'summer-mesh-hoodie',
-        name: 'SUMMER MESH HOODIE',
-        price: 95,
-        img: 'fotos/aveam_silk_hoodie_white_1777656488743.png',
-        badge: 'SUMMER 26',
-        categories: ['all', 'new-arrivals', 'hoodies', 'rtw-all', 'summer'],
-        sizes: ['S', 'M', 'L', 'XL'],
-        desc: 'Hoodie ligero de tejido mesh para verano. Bordado AVEAM en pecho. Perfecto para noches de verano.'
-    },
-    {
-        id: 'summer-resort-cap',
-        name: 'RESORT SIGNATURE CAP',
-        price: 42,
-        img: 'fotos/aveam_brutal_cap_white_1777656655425.png',
-        badge: 'SUMMER 26',
-        categories: ['all', 'new-arrivals', 'caps', 'acc-all', 'summer'],
-        sizes: ['ONE SIZE'],
-        desc: 'Gorra resort de algodón lavado con bordado tonal. Inspirada en la Riviera española. Edición verano 2026.'
-    },
-    {
-        id: 'summer-light-hoodie',
-        name: 'AVEAM LIGHTWEIGHT PULLOVER',
-        price: 110,
-        img: 'fotos/aveam_silk_hoodie_white_1777656488743.png',
-        badge: 'SUMMER 26',
-        categories: ['all', 'new-arrivals', 'hoodies', 'rtw-all', 'summer'],
-        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-        desc: 'Pullover ultraligero de algodón 220gsm con bordado minimalista. La pieza esencial del verano AVEAM.'
-    }
-];
+// ── Product Catalog (Dynamic) ──
+let PRODUCTS = [];
 
 // ── State ──
 let currentCategory = 'all';
-let cart = [];
+let shopifyClient = null;
+let checkoutId = localStorage.getItem('aveam_checkout_id');
+let currentCheckout = null;
+
+// Initialize Shopify Client
+if (window.ShopifyBuy) {
+    shopifyClient = ShopifyBuy.buildClient({
+        domain: 'aveam-clothing.myshopify.com',
+        storefrontAccessToken: '031cbd799586da1b5f9ced2164f37f73'
+    });
+}
+
+// ── Data Fetching ──
+async function loadShopifyProducts() {
+    const grid = document.getElementById('shop-grid');
+    if (grid) grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--mid-gray); letter-spacing: 0.1em; font-size: 0.8rem;">SYNCING AURA CATALOG...</div>';
+
+    const query = `
+    {
+      products(first: 50) {
+        edges {
+          node {
+            id
+            title
+            description
+            options {
+              name
+              values
+            }
+            images(first: 1) {
+              edges {
+                node {
+                  url
+                }
+              }
+            }
+            variants(first: 50) {
+              edges {
+                node {
+                  id
+                  title
+                  selectedOptions {
+                    name
+                    value
+                  }
+                  price {
+                    amount
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `;
+
+    try {
+        const res = await fetch('https://aveam-clothing.myshopify.com/api/2024-01/graphql.json', {
+            method: 'POST',
+            headers: {
+                'X-Shopify-Storefront-Access-Token': '031cbd799586da1b5f9ced2164f37f73',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ query })
+        });
+
+        const json = await res.json();
+        
+        if (json.errors) {
+            console.error("Shopify GraphQL Errors:", json.errors);
+            throw new Error("GraphQL Error");
+        }
+
+        const products = json.data.products.edges.map(e => e.node);
+        
+        PRODUCTS = products.map(p => {
+            const variants = p.variants.edges.map(e => e.node);
+            
+            let colors = [];
+            let sizes = [];
+            
+            const colorOption = p.options.find(o => o.name.toLowerCase() === 'color' || o.name.toLowerCase() === 'colour');
+            if (colorOption) colors = colorOption.values;
+            
+            const sizeOption = p.options.find(o => o.name.toLowerCase() === 'size' || o.name.toLowerCase() === 'talla');
+            if (sizeOption) sizes = sizeOption.values;
+            
+            if (colors.length === 0 && sizes.length === 0) {
+                 sizes = [...new Set(variants.map(v => v.title))].filter(s => s !== 'Default Title');
+            }
+            
+            return {
+                id: p.id,
+                shopifyId: p.id,
+                name: p.title,
+                price: parseFloat(variants[0].price.amount),
+                img: p.images.edges.length > 0 ? p.images.edges[0].node.url : '',
+                badge: '',
+                categories: ['all'],
+                colors: colors,
+                sizes: sizes.length > 0 ? sizes : ['ONE SIZE'],
+                variants: variants,
+                desc: p.description || 'Producto oficial de AVEAM.'
+            };
+        });
+        
+        // Re-render
+        if (typeof renderProducts === 'function') {
+            const currentCat = typeof currentCategory !== 'undefined' ? currentCategory : 'all';
+            const sortVal = document.getElementById('sort-select') ? document.getElementById('sort-select').value : 'newest';
+            renderProducts(currentCat, sortVal);
+        }
+    } catch (e) {
+        console.error("Error loading products from Shopify:", e);
+        if (grid) grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: red;">Failed to load catalog. Please refresh.</div>';
+    }
+}
 
 // ── DOM ──
 document.addEventListener('DOMContentLoaded', () => {
+    // Start fetching immediately
+    loadShopifyProducts();
     const grid = document.getElementById('shop-grid');
     const titleEl = document.getElementById('shop-title');
     const countEl = document.getElementById('product-count');
@@ -179,8 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = '';
 
         if (filtered.length === 0) {
-            emptyEl.style.display = 'flex';
-            countEl.textContent = '0 PRODUCTS';
+            if (PRODUCTS.length === 0) {
+                // Si todavía está vacío, significa que está cargando o no hay nada en Shopify
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--mid-gray);">SYNCING AURA CATALOG...</div>';
+            } else {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--mid-gray);">NO PRODUCTS FOUND IN THIS CATEGORY.</div>';
+            }
             return;
         }
         emptyEl.style.display = 'none';
@@ -254,7 +266,20 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProducts(currentCategory, sortSelect.value);
     });
 
-    // ── Quick View ──
+// ── Helper ──
+function getCssColor(name) {
+    const map = {
+        'sport grey': '#9ba1a8',
+        'ash grey': '#b2b6b9',
+        'dark heather': '#424242',
+        'heather grey': '#9e9e9e',
+        'navy': '#000080',
+        'maroon': '#800000'
+    };
+    return map[name.toLowerCase()] || name.replace(/\s+/g, '');
+}
+
+// ── Quick View ──
     function openQuickView(productId) {
         const p = PRODUCTS.find(x => x.id === productId);
         if (!p) return;
@@ -267,6 +292,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const modal = document.createElement('div');
         modal.className = 'quickview-modal active';
+        
+        let colorHtml = '';
+        if (p.colors && p.colors.length > 0) {
+            colorHtml = `
+                <div style="font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--mid-gray);">COLOR</div>
+                <div class="qv-colors" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    ${p.colors.map((c, i) => `<button class="qv-color-swatch ${i === 0 ? 'selected' : ''}" style="background-color: ${getCssColor(c)}; width: 24px; height: 24px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: transform 0.2s;" data-color="${c}" title="${c}"></button>`).join('')}
+                </div>
+            `;
+        }
+
         modal.innerHTML = `
             <button class="qv-close" aria-label="Close">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -278,8 +314,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="qv-name">${p.name}</div>
                 <div class="qv-price">€${p.price.toFixed(2).replace('.', ',')} EUR</div>
                 <p class="qv-desc">${p.desc}</p>
+                
+                ${colorHtml}
+
+                <div style="font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--mid-gray);">SIZE</div>
                 <div class="qv-sizes">${p.sizes.map((s, i) =>
-                    `<button class="qv-size ${i === 0 ? 'selected' : ''}">${s}</button>`
+                    `<button class="qv-size ${i === 0 ? 'selected' : ''}" data-size="${s}">${s}</button>`
                 ).join('')}</div>
                 <button class="qv-add-btn" data-id="${p.id}">ADD TO BAG</button>
             </div>
@@ -292,14 +332,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Events
         overlay.addEventListener('click', closeQuickView);
         modal.querySelector('.qv-close').addEventListener('click', closeQuickView);
+        
         modal.querySelectorAll('.qv-size').forEach(btn => {
             btn.addEventListener('click', () => {
                 modal.querySelectorAll('.qv-size').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
             });
         });
+
+        modal.querySelectorAll('.qv-color-swatch').forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.querySelectorAll('.qv-color-swatch').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+            });
+        });
+
         modal.querySelector('.qv-add-btn').addEventListener('click', () => {
-            addToCart(p.id);
+            const selectedSizeEl = modal.querySelector('.qv-size.selected');
+            const size = selectedSizeEl ? selectedSizeEl.dataset.size : null;
+            
+            const selectedColorEl = modal.querySelector('.qv-color-swatch.selected');
+            const color = selectedColorEl ? selectedColorEl.dataset.color : null;
+
+            addToCart(p.id, size, color);
             closeQuickView();
         });
     }
@@ -312,53 +367,137 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    // ── Cart ──
-    function addToCart(productId) {
+    // ── Cart / Shopify Integration ──
+    async function initCheckout() {
+        if (!shopifyClient) return;
+        
+        try {
+            if (checkoutId) {
+                // Fetch existing checkout
+                currentCheckout = await shopifyClient.checkout.fetch(checkoutId);
+                // If it was completed, create a new one
+                if (!currentCheckout || currentCheckout.completedAt) {
+                    currentCheckout = await shopifyClient.checkout.create();
+                    checkoutId = currentCheckout.id;
+                    localStorage.setItem('aveam_checkout_id', checkoutId);
+                }
+            } else {
+                // Create new checkout
+                currentCheckout = await shopifyClient.checkout.create();
+                checkoutId = currentCheckout.id;
+                localStorage.setItem('aveam_checkout_id', checkoutId);
+            }
+            updateCartUI();
+        } catch (e) {
+            console.error('Error initializing checkout', e);
+        }
+    }
+
+    async function addToCart(productId, size = null, color = null) {
         const p = PRODUCTS.find(x => x.id === productId);
         if (!p) return;
-        cart.push({ ...p });
-        updateCartUI();
-        openCart();
+        
+        openCart(); // Open drawer immediately for feedback
+        
+        if (!shopifyClient || !currentCheckout) {
+            alert("Shopify SDK not initialized yet.");
+            return;
+        }
+
+        cartItemsEl.innerHTML = '<div style="padding: 2rem; text-align: center;">Adding to bag...</div>';
+        
+        try {
+            let selectedVariant = null;
+
+            // Find variant matching BOTH color and size
+            if (p.variants && p.variants.length > 0) {
+                selectedVariant = p.variants.find(v => {
+                    const matchesSize = size ? v.selectedOptions.some(o => (o.name.toLowerCase() === 'size' || o.name.toLowerCase() === 'talla') && o.value === size) : true;
+                    const matchesColor = color ? v.selectedOptions.some(o => (o.name.toLowerCase() === 'color' || o.name.toLowerCase() === 'colour') && o.value === color) : true;
+                    return matchesSize && matchesColor;
+                });
+                if (!selectedVariant) selectedVariant = p.variants[0];
+            } else {
+                // Fallback if no full variants loaded (should not happen)
+                const shopifyProduct = await shopifyClient.product.fetch(p.shopifyId);
+                selectedVariant = shopifyProduct.variants[0];
+            }
+
+            // Fallback for btoa if SDK strictly requires it
+            let finalVariantId = selectedVariant.id;
+            if (!finalVariantId.includes('Z2lkOi')) {
+                 finalVariantId = btoa(finalVariantId);
+            }
+
+            const lineItemsToAdd = [{
+                variantId: finalVariantId,
+                quantity: 1
+            }];
+
+            currentCheckout = await shopifyClient.checkout.addLineItems(checkoutId, lineItemsToAdd);
+            updateCartUI();
+
+        } catch (e) {
+            console.error('Error adding to cart', e);
+            alert("Failed to add to cart. Please try again.");
+            updateCartUI();
+        }
     }
 
     function updateCartUI() {
-        cartCount.textContent = cart.length;
-        cartItemsEl.querySelectorAll('.cart-item').forEach(el => el.remove());
+        if (!currentCheckout) return;
 
-        if (cart.length === 0) {
+        const lineItems = currentCheckout.lineItems;
+        cartCount.textContent = lineItems.length;
+        cartItemsEl.innerHTML = '';
+
+        if (lineItems.length === 0) {
             cartEmptyEl.style.display = 'flex';
             cartFooter.style.display = 'none';
+            cartItemsEl.appendChild(cartEmptyEl);
             return;
         }
 
         cartEmptyEl.style.display = 'none';
         cartFooter.style.display = 'block';
 
-        let total = 0;
-        cart.forEach((item, i) => {
-            total += item.price;
+        lineItems.forEach((item) => {
             const el = document.createElement('div');
             el.className = 'cart-item';
             el.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                <img src="${item.variant.image ? item.variant.image.src : ''}" alt="${item.title}" class="cart-item-img">
                 <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">€${item.price.toFixed(2).replace('.', ',')} EUR</div>
-                    <button class="cart-item-remove" data-index="${i}">REMOVE</button>
+                    <div class="cart-item-name">${item.title}</div>
+                    <div class="cart-item-price">€${item.variant.price.amount} EUR</div>
+                    <div style="font-size: 0.6rem; color: #999; margin-top: 2px;">${item.variant.title !== 'Default Title' ? item.variant.title : ''}</div>
+                    <button class="cart-item-remove" data-id="${item.id}">REMOVE</button>
                 </div>
             `;
             cartItemsEl.appendChild(el);
         });
 
-        cartTotalPrice.textContent = `€${total.toFixed(2).replace('.', ',')}`;
+        cartTotalPrice.textContent = `€${currentCheckout.totalPrice.amount} EUR`;
 
         cartItemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
-            btn.addEventListener('click', () => {
-                cart.splice(parseInt(btn.dataset.index), 1);
+            btn.addEventListener('click', async () => {
+                cartItemsEl.innerHTML = '<div style="padding: 2rem; text-align: center;">Removing...</div>';
+                currentCheckout = await shopifyClient.checkout.removeLineItems(checkoutId, [btn.dataset.id]);
                 updateCartUI();
             });
         });
     }
+
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (currentCheckout && currentCheckout.webUrl) {
+                window.location.href = currentCheckout.webUrl;
+            }
+        });
+    }
+
+    // Initialize checkout on load
+    initCheckout();
 
     function openCart() {
         cartDrawer.classList.add('active');
